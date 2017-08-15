@@ -4,9 +4,9 @@
 	<script src="linandeku.js">
 		/*
 		linandeku.js
-		Õâ¸ö¿âÌá¹©ÁËÒ»¸öº¯Êıdraw(arr, w, h)ÊµÏÖ»­¸ñ×Ó
-		ÆäÖĞ£¬arrÊÇ´ú±íÒª»­µÄ¸ñ×ÓµÄÊı×é£¬
-		wÊÇ¸ñ×ÓµÄ¿í£¨ÁĞÊı£©£¬hÊÇ¸ñ×ÓµÄ¸ß¡£
+		è¿™ä¸ªåº“æä¾›äº†ä¸€ä¸ªå‡½æ•°draw(arr, w, h)å®ç°ç”»æ ¼å­
+		å…¶ä¸­ï¼Œarræ˜¯ä»£è¡¨è¦ç”»çš„æ ¼å­çš„æ•°ç»„ï¼Œ
+		wæ˜¯æ ¼å­çš„å®½ï¼ˆåˆ—æ•°ï¼‰ï¼Œhæ˜¯æ ¼å­çš„é«˜ã€‚
 		*/
 	</script>
 </head>
@@ -15,30 +15,30 @@
 <script>
 	var row = 32;
 	var col = 32;
-	//Éß×ßµÄµ±Ç°ĞĞÊı£¬³õÊ¼ÊÇĞĞÊı/2
+	//è›‡èµ°çš„å½“å‰è¡Œæ•°ï¼Œåˆå§‹æ˜¯è¡Œæ•°/2
 	var currentR = row / 2;
-	//Éß×ßµÄµ±Ç°ĞĞÊı£¬³õÊ¼ÊÇÁĞÊı/2
+	//è›‡èµ°çš„å½“å‰è¡Œæ•°ï¼Œåˆå§‹æ˜¯åˆ—æ•°/2
 	var currentI = col / 2;
 	var bl = false;
-	//¶¨ÒåË¢ĞÂºÍÇå¿Õ£¨µã»÷¿ªÊ¼ÓÎÏ·£©
+	//å®šä¹‰åˆ·æ–°å’Œæ¸…ç©ºï¼ˆç‚¹å‡»å¼€å§‹æ¸¸æˆï¼‰
 	var set;
-	//¶¨Òå³õÊ¼·½Ïò
+	//å®šä¹‰åˆå§‹æ–¹å‘
 	var currentKey = 3;
-	//ÉßµÄÊ³Îï×´Ì¬
+	//è›‡çš„é£Ÿç‰©çŠ¶æ€
 	var food = false;
-	//Ë¢ĞÂÊ³ÎïµÄÎ»ÖÃ
+	//åˆ·æ–°é£Ÿç‰©çš„ä½ç½®
 	this.x = Math.floor(Math.random() * row) ;  
     this.y = Math.floor(Math.random() * col) ;
 
-	//»æÖÆ±³¾°,
+	//ç»˜åˆ¶èƒŒæ™¯,
 	function wangkededraw(a) {
 		draw(a,row,col);
 	}
-	/* ·µ»ØÄÄ¸ö°´¼üÕıÔÚ±»ÓÃ»§°´£¬
-	0£ºÉÏ
-	1£ºÏÂ
-	2£º×ó
-	3£ºÓÒ
+	/* è¿”å›å“ªä¸ªæŒ‰é”®æ­£åœ¨è¢«ç”¨æˆ·æŒ‰ï¼Œ
+	0ï¼šä¸Š
+	1ï¼šä¸‹
+	2ï¼šå·¦
+	3ï¼šå³
 	*/
 	
 	function getKey() {
@@ -48,14 +48,14 @@
 	function EatSnake_flush() {
 		if (currentI <= 0||currentI >= col ||currentR <= 0 ||currentR >= row){
 			if(bl==false){
-				alert("ÄãÂèËÀÁË");
+				alert("ä½ å¦ˆæ­»äº†");
 				bl=true;
 			}
 			
 			return;
 		}
 		
-		// ¿´ÓÃ»§Ñ¡ÁËÄÄ¸ö·½Ïò¼ü£¬´Ó¶ø¸Ä±äcurrentR¡¢currentI£¨Ò²¾ÍÊÇÉßµÄÎ»ÖÃ£©
+		// çœ‹ç”¨æˆ·é€‰äº†å“ªä¸ªæ–¹å‘é”®ï¼Œä»è€Œæ”¹å˜currentRã€currentIï¼ˆä¹Ÿå°±æ˜¯è›‡çš„ä½ç½®ï¼‰
 		if(getKey()==0){
 			--currentR; 
 		}
@@ -72,20 +72,20 @@
 		var a = new Array(row*col);
 
 
-		// È«²¿ÎªºÚ
+		// å…¨éƒ¨ä¸ºé»‘
 		for (var j= 0; j < a.length; j++) {
 			a[j] = false;
 		}
-		// 30Îª°×É«
+		// 30ä¸ºç™½è‰²
 		a[currentR * col + currentI] = true;
-		//»­Éß
+		//ç”»è›‡
 		wangkededraw(a);
-		//»­64*64µÄ¸ñ×Ó£¬ÒÆ¶¯µÄµ¥Î»Éß
+		//ç”»64*64çš„æ ¼å­ï¼Œç§»åŠ¨çš„å•ä½è›‡
 		
 		a[this.x * col + this.y] = true;
-		//»­Ê³Îï
+		//ç”»é£Ÿç‰©
 		wangkededraw(a);
-		//Èç¹ûÊ³ÎïºÍÉß×ø±êÒ»ÖÂ£¬±íÊ¾³ÔÁË£¬ÖØĞÂË¢ĞÂÊ³Îï
+		//å¦‚æœé£Ÿç‰©å’Œè›‡åæ ‡ä¸€è‡´ï¼Œè¡¨ç¤ºåƒäº†ï¼Œé‡æ–°åˆ·æ–°é£Ÿç‰©
 		if((this.x * col + this.y)==(currentR * col + currentI)){
 			a[this.x * col + this.y] = false;
 			this.x = Math.floor(Math.random() * row) ;  
@@ -94,11 +94,11 @@
 			wangkededraw(a);
 		}
 	}
-	//»æÖÆ±³¾° £¬falseÎª±³¾°
+	//ç»˜åˆ¶èƒŒæ™¯ ï¼Œfalseä¸ºèƒŒæ™¯
 	function EatSnake() {
-		//Éß×ßµÄµ±Ç°ĞĞÊı£¬ÔÙ³õÊ¼ÊÇĞĞÊı/2
+		//è›‡èµ°çš„å½“å‰è¡Œæ•°ï¼Œå†åˆå§‹æ˜¯è¡Œæ•°/2
 		currentR = row / 2;
-		//Éß×ßµÄµ±Ç°ĞĞÊı£¬ÔÙ³õÊ¼ÊÇÁĞÊı/2
+		//è›‡èµ°çš„å½“å‰è¡Œæ•°ï¼Œå†åˆå§‹æ˜¯åˆ—æ•°/2
 		currentI = col / 2;
 		//setBackgroud("1.png");	
 		if(set != null){
@@ -112,10 +112,10 @@
 
 <canvas id="screen_1" width="800px" height="600px"></canvas>
 <br/>
-<button onclick="EatSnake()"> µãÎÒ¿ªÊ¼ÓÎÏ· </button>
+<button onclick="EatSnake()"> ç‚¹æˆ‘å¼€å§‹æ¸¸æˆ </button>
 <br/>
-<button onclick="currentKey = 0"> ÉÏ </button><button onclick="currentKey = 1"> ÏÂ </button>
-<button onclick="currentKey = 2"> ×ó </button><button onclick="currentKey = 3"> ÓÒ </button>
+<button onclick="currentKey = 0"> ä¸Š </button><button onclick="currentKey = 1"> ä¸‹ </button>
+<button onclick="currentKey = 2"> å·¦ </button><button onclick="currentKey = 3"> å³ </button>
 
 </body>
 
