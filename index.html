@@ -1,0 +1,122 @@
+<html>
+
+<head>
+	<script src="linandeku.js">
+		/*
+		linandeku.js
+		这个库提供了一个函数draw(arr, w, h)实现画格子
+		其中，arr是代表要画的格子的数组，
+		w是格子的宽（列数），h是格子的高。
+		*/
+	</script>
+</head>
+<body>
+
+<script>
+	var row = 32;
+	var col = 32;
+	//蛇走的当前行数，初始是行数/2
+	var currentR = row / 2;
+	//蛇走的当前行数，初始是列数/2
+	var currentI = col / 2;
+	var bl = false;
+	//定义刷新和清空（点击开始游戏）
+	var set;
+	//定义初始方向
+	var currentKey = 3;
+	//蛇的食物状态
+	var food = false;
+	//刷新食物的位置
+	this.x = Math.floor(Math.random() * row) ;  
+    this.y = Math.floor(Math.random() * col) ;
+
+	//绘制背景,
+	function wangkededraw(a) {
+		draw(a,row,col);
+	}
+	/* 返回哪个按键正在被用户按，
+	0：上
+	1：下
+	2：左
+	3：右
+	*/
+	
+	function getKey() {
+		return currentKey;
+	}
+
+	function EatSnake_flush() {
+		if (currentI <= 0||currentI >= col ||currentR <= 0 ||currentR >= row){
+			if(bl==false){
+				alert("你妈死了");
+				bl=true;
+			}
+			
+			return;
+		}
+		
+		// 看用户选了哪个方向键，从而改变currentR、currentI（也就是蛇的位置）
+		if(getKey()==0){
+			--currentR; 
+		}
+		if(getKey()==1){
+			++currentR;
+		}
+		if(getKey()==2){
+			--currentI;
+		}
+		if(getKey()==3){
+			++currentI;
+		}
+		
+		var a = new Array(row*col);
+
+
+		// 全部为黑
+		for (var j= 0; j < a.length; j++) {
+			a[j] = false;
+		}
+		// 30为白色
+		a[currentR * col + currentI] = true;
+		//画蛇
+		wangkededraw(a);
+		//画64*64的格子，移动的单位蛇
+		
+		a[this.x * col + this.y] = true;
+		//画食物
+		wangkededraw(a);
+		//如果食物和蛇坐标一致，表示吃了，重新刷新食物
+		if((this.x * col + this.y)==(currentR * col + currentI)){
+			a[this.x * col + this.y] = false;
+			this.x = Math.floor(Math.random() * row) ;  
+			this.y = Math.floor(Math.random() * col) ;
+			a[this.x * col + this.y] = true;
+			wangkededraw(a);
+		}
+	}
+	//绘制背景 ，false为背景
+	function EatSnake() {
+		//蛇走的当前行数，再初始是行数/2
+		currentR = row / 2;
+		//蛇走的当前行数，再初始是列数/2
+		currentI = col / 2;
+		//setBackgroud("1.png");	
+		if(set != null){
+			clearInterval(set);
+			bl = false;
+		}
+		set = setInterval("EatSnake_flush()", 500);
+		
+	 }
+</script>
+
+<canvas id="screen_1" width="800px" height="600px"></canvas>
+<br/>
+<button onclick="EatSnake()"> 点我开始游戏 </button>
+<br/>
+<button onclick="currentKey = 0"> 上 </button><button onclick="currentKey = 1"> 下 </button>
+<button onclick="currentKey = 2"> 左 </button><button onclick="currentKey = 3"> 右 </button>
+
+</body>
+
+</html>
